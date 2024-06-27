@@ -1,6 +1,6 @@
-package com.view;
+package com.utils;
 
-public class cleanscreen {
+public class ConsoleUtils {
 
     public static void clear() {
         System.out.print("\033[H\033[2J");

@@ -2,7 +2,7 @@ package com.liga_betplay;
 
 import java.util.Scanner;
 
-import com.view.cleanscreen;
+import com.utils.ConsoleUtils;
 import com.view.mainmenu;
 
 public class Main {
@@ -11,7 +11,7 @@ public class Main {
         //user para desarrollo
         String user1 = "santi";
         String passw1 = "123";
-        cleanscreen.clear();
+        ConsoleUtils.clear();
 
         System.out.print("\n" +
         "-------------------------\n" +
@@ -20,7 +20,7 @@ public class Main {
         "\n" +
         "Enter your username: ");
         String user = loginsc.nextLine();
-        cleanscreen.clear();
+        ConsoleUtils.clear();
         System.out.print("\n" +
         "-------------------------\n" +
         "   BetPlay Admin Panel   \n" +
@@ -29,7 +29,7 @@ public class Main {
         "Enter your password: ");
 
         String password = loginsc.nextLine();
-        cleanscreen.clear();
+        ConsoleUtils.clear();
 
         if (user.equals(user1) && passw1.equals(password) ) {
             mainmenu main = new mainmenu();           

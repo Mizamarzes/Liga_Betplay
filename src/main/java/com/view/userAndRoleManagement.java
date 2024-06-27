@@ -2,12 +2,15 @@ package com.view;
 
 import java.util.Scanner;
 
+import com.utils.ConsoleUtils;
+
 public class userAndRoleManagement {
 
     Scanner menusc = new Scanner(System.in);
 
     public void show() {
-        cleanscreen.clear();
+        
+        ConsoleUtils.clear();
         int op;
 
         do {
