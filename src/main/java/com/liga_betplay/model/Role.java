@@ -1,20 +1,19 @@
 package com.liga_betplay.model;
-import java.util.List;
 
-public class Rol {
+public class Role {
     private int id;
     private String name;
-    private List<Permission> permissions;
+    private int permission;
 
     // Default constructor
-    public Rol(){
+    public Role(){
 
     }
     
-    public Rol(int id, String name, List<Permission> permissions) {
+    public Role(int id, String name, int permission) {
         this.id = id;
         this.name = name;
-        this.permissions = permissions;
+        this.permission = permission;
     }
 
     // Getters and Setters
@@ -34,12 +33,12 @@ public class Rol {
         this.name = name;
     }
 
-    public List<Permission> getPermissions() {
-        return permissions;
+    public int getPermissions() {
+        return permission;
     }
 
-    public void setPermissions(List<Permission> permissions) {
-        this.permissions = permissions;
+    public void setPermissions(int permission) {
+        this.permission = permission;
     }
 
 }
