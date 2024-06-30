@@ -3,8 +3,8 @@ package com.liga_betplay.view;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.liga_betplay.entity.Player;
-import com.liga_betplay.entity.Team;
+import com.liga_betplay.model.Player;
+import com.liga_betplay.model.Team;
 import com.liga_betplay.utils.ConsoleUtils;
 
 public class teamAndPlayerManagement {

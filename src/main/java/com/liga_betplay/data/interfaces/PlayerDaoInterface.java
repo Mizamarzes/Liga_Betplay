@@ -3,7 +3,7 @@ package com.liga_betplay.data.interfaces;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.liga_betplay.entity.Player;
+import com.liga_betplay.model.Player;
 
 public interface PlayerDaoInterface {
     void addPlayer(Player player) throws SQLException;

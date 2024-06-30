@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.liga_betplay.data.interfaces.PlayerDaoInterface;
-import com.liga_betplay.entity.Player;
+import com.liga_betplay.model.Player;
 
 public class PlayerDao implements PlayerDaoInterface{
 

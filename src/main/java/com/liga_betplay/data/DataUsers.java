@@ -3,7 +3,7 @@ package com.liga_betplay.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.liga_betplay.entity.User;
+import com.liga_betplay.model.User;
 
 public class DataUsers {
 
