@@ -17,7 +17,6 @@ public class DatabaseInitializer {
     public void createTables() {
         Connection connection = null;
         try {
-            // Load properties from db.properties file
             Properties props = new Properties();
             InputStream input = getClass().getClassLoader().getResourceAsStream("db.properties");
             
@@ -31,22 +30,17 @@ public class DatabaseInitializer {
             String user = props.getProperty("user");
             String password = props.getProperty("password");
 
-            // Establish database connection
             connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
 
-            // Drop database if it exists
             String dropDatabaseQuery = "DROP DATABASE IF EXISTS betplay";
             statement.executeUpdate(dropDatabaseQuery);
 
-            // Create database if it doesn't exist
             String createDatabaseQuery = "CREATE DATABASE IF NOT EXISTS betplay";
             statement.executeUpdate(createDatabaseQuery);
 
-            // Use the database
             statement.execute("USE betplay");
 
-            // Create necessary tables
             createLeagueTable(statement);
             createTeamTable(statement);
             createPlayerTable(statement);
@@ -71,8 +65,6 @@ public class DatabaseInitializer {
             createCommunicationTable(statement);
             createUserCommunicationTable(statement);
             createTicketTable(statement);
-
-            System.out.println("Tables created successfully.");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -285,6 +277,12 @@ public class DatabaseInitializer {
                                   "FOREIGN KEY (role) REFERENCES Role(id)" +
                                   ")";
         statement.executeUpdate(createTableQuery);
+
+        String query = "INSERT IGNORE INTO User (id, name, email, password, role) VALUES " +
+        "(1, 'santilaguado', 'santi@gmail.com', 'santi123', 1), " +
+        "(2, 'mizamarzes', 'mizamarzes@gmail.com', 'mizamarzes123', 1)";
+        
+        statement.executeUpdate(query);
     }
 
     private void createRoleTable(Statement statement) throws SQLException {
@@ -297,12 +295,15 @@ public class DatabaseInitializer {
         statement.executeUpdate(createTableQuery);
 
         // Insert of default roles
-        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (1, 'League Admin')");
-        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (2, 'Technical Team')");
-        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (3, 'Referee')");
-        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (4, 'Team Doctor')");
-        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (5, 'Journalist')");
-        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (6, 'Fan')");
+        String query = "INSERT IGNORE INTO Role (id, name, permission) VALUES " +
+        "(1, 'League Admin', 1), " +
+        "(2, 'Technical Team', 2), " +
+        "(3, 'Referee', 3), " +
+        "(4, 'Team Doctor', 4), " +
+        "(5, 'Journalist', 5), " +
+        "(6, 'Fan', 6)";
+
+        statement.executeUpdate(query);
     }
 
     private void createPermissionTable(Statement statement) throws SQLException {
@@ -312,12 +313,15 @@ public class DatabaseInitializer {
                                   ")";
         statement.executeUpdate(createTableQuery);
 
-        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (1, 'Administrator Perms')");
-        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (2, 'TechTeam Perms')");
-        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (3, 'Referee Perms')");
-        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (4, 'TeamDoctor Perms')");
-        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (5, 'Journalist Perms')");
-        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (6, 'Fan Perms')");
+        String sql = "INSERT IGNORE INTO Permission (id, description) VALUES " +
+        "(1, 'Administrator Perms'), " +
+        "(2, 'TechTeam Perms'), " +
+        "(3, 'Referee Perms'), " +
+        "(4, 'TeamDoctor Perms'), " +
+        "(5, 'Journalist Perms'), " +
+        "(6, 'Fan Perms')";
+
+        statement.executeUpdate(sql);
     }
 
     private void createSponsorTable(Statement statement) throws SQLException {

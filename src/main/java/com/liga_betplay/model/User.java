@@ -5,7 +5,7 @@ public class User {
     private String name;
     private String email;
     private String password;
-    private Rol rol;
+    private Role rol;
 
     // Default constructor
     public User(){
@@ -13,7 +13,7 @@ public class User {
     }
 
     // Constructor
-    public User(int id, String name, String email, String password, Rol rol) {
+    public User(int id, String name, String email, String password, Role rol) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -54,11 +54,11 @@ public class User {
         this.password = password;
     }
 
-    public Rol getRol() {
+    public Role getRol() {
         return rol;
     }
 
-    public void setRol(Rol rol) {
+    public void setRol(Role rol) {
         this.rol = rol;
     }
     

@@ -1,18 +1,37 @@
 package com.liga_betplay.view;
+import java.sql.SQLException;
 import java.util.Scanner;
+
+import com.liga_betplay.model.dao.UserDao;
+import com.liga_betplay.utils.ConsoleUtils;
 
 public class mainmenu {
 
     Scanner menusc = new Scanner(System.in);
+    @SuppressWarnings("unused")
+    private String username;
+    private String userRole;
+
+    public mainmenu(String username) throws SQLException {
+        this.username = username;
+        UserDao userDao = new UserDao();
+        userRole = userDao.getUserRole(username);
+
+    }
+
 
     public void showmenu() {
         int op;
 
         do {
-            System.out.println("---------------------------------------\n" +
-            "          BetPlay Admin Panel          \n" +
-            "        Please select an option:       \n" +
-            "---------------------------------------\n" +
+
+            ConsoleUtils.clear();
+            System.out.println("--------------------------------------\n" +
+            "      Signed in as " + userRole +    "\n" +
+            "--------------------------------------\n" +
+            "            BetPlay Panel             \n" +
+            "       Please select an option:       \n" +
+            "--------------------------------------\n" +
             "\n" +
             "1. Team and Player Management\n" +
             "2. Game Scheduling and Results\n" +
