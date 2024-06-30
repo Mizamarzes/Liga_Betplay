@@ -1,4 +1,4 @@
-package com.liga_betplay.data;
+package com.liga_betplay.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Properties;
 
 import com.liga_betplay.data.interfaces.PlayerDaoInterface;
-import com.liga_betplay.model.Player;
 
 public class PlayerDao implements PlayerDaoInterface{
 
