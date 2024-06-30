@@ -2,30 +2,31 @@ package com.entity;
 
 import java.util.List;
 
-public class Player {
-    private int id;
-    private String name;
-    private int age;
+public class Player extends Person {
     private String position;
-    private String nationality;
     private int shirt_number;
-    private String team;
+    private Team team;
     private List<Injury> injuries;
     private List<Performance> performances;
 
     // Default constructor
     public Player(){
-
+        super();
     }
 
-    // Constructor
-    public Player(int id, String name, int age, String position, String nationality, int shirt_number, String team,
-            List<Injury> injuries, List<Performance> performances) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
+    // Constructors
+    public Player(String position, int shirt_number, Team team, List<Injury> injuries, List<Performance> performances) {
         this.position = position;
-        this.nationality = nationality;
+        this.shirt_number = shirt_number;
+        this.team = team;
+        this.injuries = injuries;
+        this.performances = performances;
+    }
+
+    public Player(int id, String name, int age, String nationality, String position, int shirt_number, Team team,
+            List<Injury> injuries, List<Performance> performances) {
+        super(id, name, age, nationality);
+        this.position = position;
         this.shirt_number = shirt_number;
         this.team = team;
         this.injuries = injuries;
@@ -81,11 +82,11 @@ public class Player {
         this.shirt_number = shirt_number;
     }
 
-    public String getTeam() {
+    public Team getTeam() {
         return team;
     }
 
-    public void setTeam(String team) {
+    public void setTeam(Team team) {
         this.team = team;
     }
 

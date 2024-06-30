@@ -9,11 +9,11 @@ public class Match {
     private Team visitTeam;
     private Date date;
     private String time;
-    private String stadium;
+    private Stadium stadium;
     private List<Goal> goals;
     private List<Card> cards;
     private List<Incident> incidents;
-    private String result;
+    private Result result;
 
     // default constructor
     public Match(){
@@ -21,8 +21,8 @@ public class Match {
     }
 
     // Constructor
-    public Match(int id, Team localTeam, Team visitTeam, Date date, String time, String stadium, List<Goal> goals,
-            List<Card> cards, List<Incident> incidents, String result) {
+    public Match(int id, Team localTeam, Team visitTeam, Date date, String time, Stadium stadium, List<Goal> goals,
+            List<Card> cards, List<Incident> incidents, Result result) {
         this.id = id;
         this.localTeam = localTeam;
         this.visitTeam = visitTeam;
@@ -76,11 +76,11 @@ public class Match {
         this.time = time;
     }
 
-    public String getStadium() {
+    public Stadium getStadium() {
         return stadium;
     }
 
-    public void setStadium(String stadium) {
+    public void setStadium(Stadium stadium) {
         this.stadium = stadium;
     }
 
@@ -108,11 +108,11 @@ public class Match {
         this.incidents = incidents;
     }
 
-    public String getResult() {
+    public Result getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(Result result) {
         this.result = result;
     }
 

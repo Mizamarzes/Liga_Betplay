@@ -7,7 +7,7 @@ public class Team {
     private String name;
     private String city;
     private Stadium stadium;
-    private String trainer;
+    private Trainer trainer;
     private List<Player> players;
     private List<Match> matches;
 
@@ -17,7 +17,7 @@ public class Team {
     }
 
     // contructor
-    public Team(int id, String name, String city, Stadium stadium, String trainer, List<Player> players,
+    public Team(int id, String name, String city, Stadium stadium, Trainer trainer, List<Player> players,
             List<Match> matches) {
         this.id = id;
         this.name = name;
@@ -61,11 +61,11 @@ public class Team {
         this.stadium = stadium;
     }
 
-    public String getTrainer() {
+    public Trainer getTrainer() {
         return trainer;
     }
 
-    public void setTrainer(String trainer) {
+    public void setTrainer(Trainer trainer) {
         this.trainer = trainer;
     }
 
