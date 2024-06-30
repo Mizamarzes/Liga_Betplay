@@ -2,8 +2,8 @@ package com.liga_betplay;
 
 import java.util.Scanner;
 
-import com.utils.ConsoleUtils;
-import com.view.mainmenu;
+import com.liga_betplay.utils.ConsoleUtils;
+import com.liga_betplay.view.mainmenu;
 
 public class Main {
     public static void main(String[] args) {
