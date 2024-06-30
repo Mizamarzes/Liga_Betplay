@@ -12,6 +12,11 @@ import java.util.Properties;
 
 import com.liga_betplay.data.interfaces.TeamDaoInterface;
 
-public class TeamDao {
-    
+public class TeamDao implements TeamDaoInterface {
+    private Connection connection;
+
+    @Override
+    public void addTeam(Team team) throws SQLException {
+        String query = "INSERT INTO teams ()"
+    }
 }

@@ -31,12 +31,12 @@ public class PlayerDao implements PlayerDaoInterface{
 
     @Override
     public void addPlayer(Player player) throws SQLException {
-        String query = "INSERT INTO players (name, age, nationality, position, shirt_number, team_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO player (name, age, nationality, position, shirt_number, team) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, player.getName());
             ps.setInt(2, player.getAge());
-            ps.setString(3, player.getNationality());
-            ps.setString(4, player.getPosition());
+            ps.setString(4, player.getNationality());
+            ps.setString(3, player.getPosition());
             ps.setInt(5, player.getShirt_number());
             ps.setInt(6, player.getTeam().getId());
             ps.executeUpdate();
@@ -48,7 +48,7 @@ public class PlayerDao implements PlayerDaoInterface{
 
     @Override
     public Player findById(int id) throws SQLException {
-        String query = "SELECT * FROM players WHERE id = ?";
+        String query = "SELECT * FROM player WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
