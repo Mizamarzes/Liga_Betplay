@@ -115,8 +115,8 @@ public class DatabaseInitializer {
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
                                   "name VARCHAR(100) NOT NULL," +
                                   "age INT," +
-                                  "position VARCHAR(50)," +
                                   "nationality VARCHAR(100)," +
+                                  "position VARCHAR(50)," +
                                   "shirt_number INT," +
                                   "team INT," +
                                   "FOREIGN KEY (team) REFERENCES Team(id)" +
