@@ -1,4 +1,4 @@
-package com.liga_betplay.model;
+package com.liga_betplay.model.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.liga_betplay.data.interfaces.PlayerDaoInterface;
+import com.liga_betplay.model.Player;
 
 public class PlayerDao implements PlayerDaoInterface{
 
@@ -35,8 +36,8 @@ public class PlayerDao implements PlayerDaoInterface{
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, player.getName());
             ps.setInt(2, player.getAge());
-            ps.setString(4, player.getNationality());
-            ps.setString(3, player.getPosition());
+            ps.setString(3, player.getNationality());
+            ps.setString(4, player.getPosition());
             ps.setInt(5, player.getShirt_number());
             ps.setInt(6, player.getTeam().getId());
             ps.executeUpdate();
@@ -71,7 +72,7 @@ public class PlayerDao implements PlayerDaoInterface{
     @Override
     public List<Player> findAll() throws SQLException {
         List<Player> players = new ArrayList<>();
-        String query = "SELECT * FROM players";
+        String query = "SELECT * FROM player";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -109,7 +110,7 @@ public class PlayerDao implements PlayerDaoInterface{
 
     @Override
     public void deletePlayer(int id) throws SQLException {
-        String query = "DELETE FROM players WHERE id = ?";
+        String query = "DELETE FROM player WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
