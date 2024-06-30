@@ -6,5 +6,5 @@ import java.util.List;
 import com.liga_betplay.model.Team;
 
 public interface TeamDaoInterface {
-    void 
+    
 }
