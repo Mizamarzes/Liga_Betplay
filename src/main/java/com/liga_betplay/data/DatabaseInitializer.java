@@ -35,6 +35,10 @@ public class DatabaseInitializer {
             connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
 
+            // Drop database if it exists
+            String dropDatabaseQuery = "DROP DATABASE IF EXISTS betplay";
+            statement.executeUpdate(dropDatabaseQuery);
+
             // Create database if it doesn't exist
             String createDatabaseQuery = "CREATE DATABASE IF NOT EXISTS betplay";
             statement.executeUpdate(createDatabaseQuery);
@@ -43,8 +47,10 @@ public class DatabaseInitializer {
             statement.execute("USE betplay");
 
             // Create necessary tables
+            createLeagueTable(statement);
             createTeamTable(statement);
             createPlayerTable(statement);
+            createStadiumTable(statement);
             createGameTable(statement);
             createResultTable(statement);
             createGoalTable(statement);
@@ -52,16 +58,19 @@ public class DatabaseInitializer {
             createIncidentTable(statement);
             createInjuryTable(statement);
             createPerformanceTable(statement);
-            createTrainingTable(statement);
             createActivityTable(statement);
+            createTrainingTable(statement);
+            createTrainingPlayerTable(statement);
             createTransferTable(statement);
+            createPermissionTable(statement);
             createRoleTable(statement);
             createUserTable(statement);
-            createPermissionTable(statement);
             createSponsorTable(statement);
+            createTeamSponsorTable(statement);
+            createLeagueSponsorTable(statement);            
             createCommunicationTable(statement);
+            createUserCommunicationTable(statement);
             createTicketTable(statement);
-            createStadiumTable(statement);
 
             System.out.println("Tables created successfully.");
 
@@ -80,13 +89,23 @@ public class DatabaseInitializer {
         }
     }
 
+    private void createLeagueTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS League (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "name VARCHAR(100) NOT NULL," +
+                                  "country VARCHAR(100) NOT NULL" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
     private void createTeamTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Team (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
                                   "name VARCHAR(100) NOT NULL," +
                                   "city VARCHAR(100) NOT NULL," +
-                                  "stadium VARCHAR(100) NOT NULL," +
-                                  "trainer VARCHAR(100) NOT NULL" +
+                                  "trainer VARCHAR(100) NOT NULL," +
+                                  "league INT," +
+                                  "FOREIGN KEY (league) REFERENCES League(id)" +
                                   ")";
         statement.executeUpdate(createTableQuery);
     }
@@ -105,6 +124,16 @@ public class DatabaseInitializer {
         statement.executeUpdate(createTableQuery);
     }
 
+    private void createStadiumTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS Stadium (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "name VARCHAR(100) NOT NULL," +
+                                  "location VARCHAR(255) NOT NULL," +
+                                  "capacity INT" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
     private void createGameTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Game (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -112,9 +141,10 @@ public class DatabaseInitializer {
                                   "away_team INT," +
                                   "date DATE," +
                                   "time TIME," +
-                                  "stadium VARCHAR(100)," +
+                                  "stadium INT," +
                                   "FOREIGN KEY (home_team) REFERENCES Team(id)," +
-                                  "FOREIGN KEY (away_team) REFERENCES Team(id)" +
+                                  "FOREIGN KEY (away_team) REFERENCES Team(id)," +
+                                  "FOREIGN KEY (stadium) REFERENCES Stadium(id)" +
                                   ")";
         statement.executeUpdate(createTableQuery);
     }
@@ -195,20 +225,6 @@ public class DatabaseInitializer {
         statement.executeUpdate(createTableQuery);
     }
 
-    private void createTrainingTable(Statement statement) throws SQLException {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS Training (" +
-                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
-                                  "team INT," +
-                                  "date DATE," +
-                                  "time TIME," +
-                                  "location VARCHAR(255)," +
-                                  "activities TEXT," +
-                                  "selected_players TEXT," +
-                                  "FOREIGN KEY (team) REFERENCES Team(id)" +
-                                  ")";
-        statement.executeUpdate(createTableQuery);
-    }
-
     private void createActivityTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Activity (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -217,6 +233,32 @@ public class DatabaseInitializer {
                                   ")";
         statement.executeUpdate(createTableQuery);
     }
+
+    private void createTrainingTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS Training (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "team INT," +
+                                  "date DATE," +
+                                  "time TIME," +
+                                  "location VARCHAR(255)," +
+                                  "activity INT," + 
+                                  "FOREIGN KEY (team) REFERENCES Team(id)," +
+                                  "FOREIGN KEY (activity) REFERENCES Activity(id)" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
+    private void createTrainingPlayerTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS TrainingPlayer (" +
+                                  "training_id INT," +
+                                  "player_id INT," +
+                                  "PRIMARY KEY (training_id, player_id)," +
+                                  "FOREIGN KEY (training_id) REFERENCES Training(id)," +
+                                  "FOREIGN KEY (player_id) REFERENCES Player(id)" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
 
     private void createTransferTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Transfer (" +
@@ -248,15 +290,17 @@ public class DatabaseInitializer {
     private void createRoleTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Role (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
-                                  "name VARCHAR(50) NOT NULL" +
+                                  "name VARCHAR(50) NOT NULL," +
+                                  "permission INT," +
+                                  "FOREIGN KEY (permission) REFERENCES Permission(id)" +
                                   ")";
         statement.executeUpdate(createTableQuery);
 
-        // Insert default roles (adjust as needed)
-        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (1, 'Administrator')");
-        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (2, 'TechTeam')");
+        // Insert of default roles
+        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (1, 'League Admin')");
+        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (2, 'Technical Team')");
         statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (3, 'Referee')");
-        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (4, 'TeamDoctor')");
+        statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (4, 'Team Doctor')");
         statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (5, 'Journalist')");
         statement.executeUpdate("INSERT IGNORE INTO Role (id, name) VALUES (6, 'Fan')");
     }
@@ -267,6 +311,13 @@ public class DatabaseInitializer {
                                   "description TEXT" +
                                   ")";
         statement.executeUpdate(createTableQuery);
+
+        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (1, 'Administrator Perms')");
+        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (2, 'TechTeam Perms')");
+        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (3, 'Referee Perms')");
+        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (4, 'TeamDoctor Perms')");
+        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (5, 'Journalist Perms')");
+        statement.executeUpdate("INSERT IGNORE INTO Permission (id, description) VALUES (6, 'Fan Perms')");
     }
 
     private void createSponsorTable(Statement statement) throws SQLException {
@@ -281,12 +332,45 @@ public class DatabaseInitializer {
         statement.executeUpdate(createTableQuery);
     }
 
+    private void createTeamSponsorTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS TeamSponsor (" +
+                                  "team_id INT," +
+                                  "sponsor_id INT," +
+                                  "PRIMARY KEY (team_id, sponsor_id)," +
+                                  "FOREIGN KEY (team_id) REFERENCES Team(id)," +
+                                  "FOREIGN KEY (sponsor_id) REFERENCES Sponsor(id)" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
+    private void createLeagueSponsorTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS LeagueSponsor (" +
+                                  "league_id INT," +
+                                  "sponsor_id INT," +
+                                  "PRIMARY KEY (league_id, sponsor_id)," +
+                                  "FOREIGN KEY (league_id) REFERENCES League(id)," +
+                                  "FOREIGN KEY (sponsor_id) REFERENCES Sponsor(id)" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
     private void createCommunicationTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Communication (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
                                   "title VARCHAR(255) NOT NULL," +
                                   "content TEXT," +
                                   "publish_date DATE" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
+    private void createUserCommunicationTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS UserCommunication (" +
+                                  "user_id INT," +
+                                  "communication_id INT," +
+                                  "PRIMARY KEY (user_id, communication_id)," +
+                                  "FOREIGN KEY (user_id) REFERENCES User(id)," +
+                                  "FOREIGN KEY (communication_id) REFERENCES Communication(id)" +
                                   ")";
         statement.executeUpdate(createTableQuery);
     }
@@ -302,16 +386,6 @@ public class DatabaseInitializer {
                                   "location VARCHAR(100)," +
                                   "FOREIGN KEY (game) REFERENCES Game(id)," +
                                   "FOREIGN KEY (buyer) REFERENCES User(id)" +
-                                  ")";
-        statement.executeUpdate(createTableQuery);
-    }
-
-    private void createStadiumTable(Statement statement) throws SQLException {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS Stadium (" +
-                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
-                                  "name VARCHAR(100) NOT NULL," +
-                                  "location VARCHAR(255) NOT NULL," +
-                                  "capacity INT" +
                                   ")";
         statement.executeUpdate(createTableQuery);
     }
