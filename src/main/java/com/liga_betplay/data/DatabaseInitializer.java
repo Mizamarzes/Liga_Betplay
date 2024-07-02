@@ -43,6 +43,7 @@ public class DatabaseInitializer {
 
             createLeagueTable(statement);
             createTrainerTable(statement);
+            createStadiumTable(statement); 
             createTeamTable(statement);
             createTeamAwardTable(statement);
             createTypeOfEquipmentTable(statement);
@@ -50,7 +51,6 @@ public class DatabaseInitializer {
             createTeamEquipmentTable(statement);
             createPlayerTable(statement);
             createPlayerAwardTable(statement);
-            createStadiumTable(statement); 
             createRefereeTable(statement); 
             createGameTable(statement);
             createCallUpTable(statement);
