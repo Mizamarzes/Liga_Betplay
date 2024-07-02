@@ -42,14 +42,23 @@ public class DatabaseInitializer {
             statement.execute("USE betplay");
 
             createLeagueTable(statement);
+            createTrainerTable(statement);
             createTeamTable(statement);
+            createTeamAwardTable(statement);
+            createTypeOfEquipmentTable(statement);
+            createEquipmentTable(statement);
+            createTeamEquipmentTable(statement);
             createPlayerTable(statement);
-            createStadiumTable(statement);
+            createPlayerAwardTable(statement);
+            createStadiumTable(statement); 
+            createRefereeTable(statement); 
             createGameTable(statement);
-            createResultTable(statement);
+            createCallUpTable(statement);
+            createCallUpPlayerTable(statement);
             createGoalTable(statement);
             createCardTable(statement);
             createIncidentTable(statement);
+            createResultTable(statement);
             createInjuryTable(statement);
             createPerformanceTable(statement);
             createActivityTable(statement);
@@ -65,7 +74,7 @@ public class DatabaseInitializer {
             createCommunicationTable(statement);
             createUserCommunicationTable(statement);
             createTicketTable(statement);
-
+            
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
@@ -90,14 +99,70 @@ public class DatabaseInitializer {
         statement.executeUpdate(createTableQuery);
     }
 
+    private void createTrainerTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS Trainer (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "name VARCHAR(100)," +
+                                  "country VARCHAR(100)," +
+                                  "experience INT" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);                      
+    }
+
     private void createTeamTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Team (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
                                   "name VARCHAR(100) NOT NULL," +
                                   "city VARCHAR(100) NOT NULL," +
-                                  "trainer VARCHAR(100) NOT NULL," +
+                                  "trainer INT," +
                                   "league INT," +
-                                  "FOREIGN KEY (league) REFERENCES League(id)" +
+                                  "FOREIGN KEY (league) REFERENCES League(id)," +
+                                  "FOREIGN KEY (trainer) REFERENCES Trainer(id)" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
+    private void createTeamAwardTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS TeamAward (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "name VARCHAR(100) NOT NULL," +
+                                  "description TEXT," +
+                                  "team_id INT," +
+                                  "award_date DATE," +
+                                  "FOREIGN KEY (team_id) REFERENCES Team(id) ON DELETE CASCADE" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
+    private void createTypeOfEquipmentTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS TypeOfEquipment (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "name VARCHAR(100) NOT NULL" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
+    private void createEquipmentTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS Equipment (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "name VARCHAR(100) NOT NULL," +
+                                  "type_id INT," +
+                                  "quantity INT," +
+                                  "team_id INT," +
+                                  "acquisition_date DATE," +
+                                  "FOREIGN KEY (type_id) REFERENCES TypeOfEquipment(id)," +
+                                  "FOREIGN KEY (team_id) REFERENCES Team(id)" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
+    private void createTeamEquipmentTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS TeamEquipment (" +
+                                  "team_id INT," +
+                                  "equipment_id INT," +
+                                  "PRIMARY KEY (team_id, equipment_id)," +
+                                  "FOREIGN KEY (team_id) REFERENCES Team(id)," +
+                                  "FOREIGN KEY (equipment_id) REFERENCES Equipment(id)" +
                                   ")";
         statement.executeUpdate(createTableQuery);
     }
@@ -116,6 +181,18 @@ public class DatabaseInitializer {
         statement.executeUpdate(createTableQuery);
     }
 
+    private void createPlayerAwardTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS PlayerAward (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "name VARCHAR(100) NOT NULL," +
+                                  "description TEXT," +
+                                  "player_id INT," +
+                                  "award_date DATE," +
+                                  "FOREIGN KEY (player_id) REFERENCES Player(id) ON DELETE CASCADE" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
     private void createStadiumTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Stadium (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -126,6 +203,16 @@ public class DatabaseInitializer {
         statement.executeUpdate(createTableQuery);
     }
 
+    private void createRefereeTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS Referee (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "name VARCHAR(100)," +
+                                  "country VARCHAR(100)," +
+                                  "experience INT" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);                      
+    }
+
     private void createGameTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Game (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
@@ -134,9 +221,35 @@ public class DatabaseInitializer {
                                   "date DATE," +
                                   "time TIME," +
                                   "stadium INT," +
+                                  "referee INT," +
+                                  "league INT," +
                                   "FOREIGN KEY (home_team) REFERENCES Team(id)," +
                                   "FOREIGN KEY (away_team) REFERENCES Team(id)," +
-                                  "FOREIGN KEY (stadium) REFERENCES Stadium(id)" +
+                                  "FOREIGN KEY (stadium) REFERENCES Stadium(id)," +
+                                  "FOREIGN KEY (referee) REFERENCES Referee(id)," +
+                                  "FOREIGN KEY (league) REFERENCES League(id)" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
+    private void createCallUpTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS CallUp (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "game_id INT," +
+                                  "call_up_date DATE," +
+                                  "additional_info TEXT," +
+                                  "FOREIGN KEY (game_id) REFERENCES Game(id)" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
+    private void createCallUpPlayerTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS CallUpPlayer (" +
+                                  "call_up_id INT," +
+                                  "player_id INT," +
+                                  "PRIMARY KEY(call_up_id, player_id)," +
+                                  "FOREIGN KEY (call_up_id) REFERENCES CallUp(id) ON DELETE CASCADE," +
+                                  "FOREIGN KEY (player_id) REFERENCES Player(id) ON DELETE CASCADE" +
                                   ")";
         statement.executeUpdate(createTableQuery);
     }
