@@ -1,13 +1,12 @@
 package com.liga_betplay.view;
+
 import java.sql.SQLException;
-import java.util.Scanner;
 
 import com.liga_betplay.model.dao.UserDao;
 import com.liga_betplay.utils.ConsoleUtils;
 
 public class mainmenu {
 
-    Scanner menusc = new Scanner(System.in);
     @SuppressWarnings("unused")
     private String username;
     private String userRole;
@@ -46,7 +45,7 @@ public class mainmenu {
             "11. Sign Out\n"
             );
 
-            op = menusc.nextInt();
+            op = ConsoleUtils.verifyEntryInt(1, 11);
 
             switch (op) {
                 case 1:
@@ -91,13 +90,12 @@ public class mainmenu {
                     break;
                 case 11:
                     System.out.println("Bye Bye my Nigga");
-                    break;
+                    return;
                 default:
-                    System.out.println("Invalid option. Please select a valid number.");
                     break;
             }
 
-        } while (op != 11);
+        } while (true);
 
     }
 
