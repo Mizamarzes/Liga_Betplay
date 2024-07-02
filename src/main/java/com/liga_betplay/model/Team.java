@@ -1,15 +1,12 @@
 package com.liga_betplay.model;
 
-import java.util.List;
-
 public class Team {
     private int id;
     private String name;
     private String city;
     private Stadium stadium;
     private Trainer trainer;
-    private List<Player> players;
-    private List<Match> matches;
+    private League league;
 
     // default constructor
     public Team(){
@@ -17,17 +14,15 @@ public class Team {
     }
 
     // contructor
-    public Team(int id, String name, String city, Stadium stadium, Trainer trainer, List<Player> players,
-            List<Match> matches) {
+    public Team(int id, String name, String city, Stadium stadium, Trainer trainer, League league) {
         this.id = id;
         this.name = name;
         this.city = city;
         this.stadium = stadium;
         this.trainer = trainer;
-        this.players = players;
-        this.matches = matches;
+        this.league = league;
     }
-    
+
     // Getters and Setters
     public int getId() {
         return id;
@@ -69,21 +64,11 @@ public class Team {
         this.trainer = trainer;
     }
 
-    public List<Player> getPlayers() {
-        return players;
+    public League getLeague() {
+        return league;
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
+    public void setLeague(League league) {
+        this.league = league;
     }
-
-    public List<Match> getMatches() {
-        return matches;
-    }
-
-    public void setMatches(List<Match> matches) {
-        this.matches = matches;
-    }
-
-   
 }

@@ -1,10 +1,10 @@
-// package com.liga_betplay.data.interfaces;
+package com.liga_betplay.data.interfaces;
 
-// import java.sql.SQLException;
-// import java.util.List;
+import java.sql.SQLException;
 
-// import com.liga_betplay.model.Team;
+import com.liga_betplay.model.Team;
 
-// public interface TeamDaoInterface {
-    
-// }
+public interface TeamDaoInterface {
+    void addTeam(Team team) throws SQLException;
+    // Team findById(int id) throws SQLException;
+}

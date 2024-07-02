@@ -109,13 +109,25 @@ public class DatabaseInitializer {
         statement.executeUpdate(createTableQuery);                      
     }
 
+    private void createStadiumTable(Statement statement) throws SQLException {
+        String createTableQuery = "CREATE TABLE IF NOT EXISTS Stadium (" +
+                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
+                                  "name VARCHAR(100) NOT NULL," +
+                                  "location VARCHAR(255) NOT NULL," +
+                                  "capacity INT" +
+                                  ")";
+        statement.executeUpdate(createTableQuery);
+    }
+
     private void createTeamTable(Statement statement) throws SQLException {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Team (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
                                   "name VARCHAR(100) NOT NULL," +
                                   "city VARCHAR(100) NOT NULL," +
+                                  "stadium INT," +
                                   "trainer INT," +
                                   "league INT," +
+                                  "FOREIGN KEY (stadium) REFERENCES Stadium(id)," +
                                   "FOREIGN KEY (league) REFERENCES League(id)," +
                                   "FOREIGN KEY (trainer) REFERENCES Trainer(id)" +
                                   ")";
@@ -189,16 +201,6 @@ public class DatabaseInitializer {
                                   "player_id INT," +
                                   "award_date DATE," +
                                   "FOREIGN KEY (player_id) REFERENCES Player(id) ON DELETE CASCADE" +
-                                  ")";
-        statement.executeUpdate(createTableQuery);
-    }
-
-    private void createStadiumTable(Statement statement) throws SQLException {
-        String createTableQuery = "CREATE TABLE IF NOT EXISTS Stadium (" +
-                                  "id INT AUTO_INCREMENT PRIMARY KEY," +
-                                  "name VARCHAR(100) NOT NULL," +
-                                  "location VARCHAR(255) NOT NULL," +
-                                  "capacity INT" +
                                   ")";
         statement.executeUpdate(createTableQuery);
     }
