@@ -1,5 +1,7 @@
 package com.liga_betplay.view;
 
+import com.liga_betplay.model.dao.PlayerDao;
+
 import com.liga_betplay.utils.ConsoleUtils;
 
 public class teamAndPlayerManagement {
@@ -108,27 +110,21 @@ public class teamAndPlayerManagement {
             "Enter an option: ");
             op = ConsoleUtils.verifyEntryInt(1, 7);
             
-            // Team equipo = new Team();
-
-            // ArrayList<Player> jugadores = new ArrayList<>();
-            // ArrayList<Coach> entrenadores = new ArrayList<>();
-            // ArrayList<Doctor> masajistas = new ArrayList<>();
-
             switch (op) {
                 case 1:
-                    //crearEquipo(equipo, jugadores, entrenadores, masajistas);
+                    
                     break;
                 case 2:
-                    // actualizarEquipo();
+                    
                     break;
                 case 3:
-                    //buscarEquipo();
+                    
                     break;
                 case 4:
-                    //eliminarEquipo();
+                    
                     break;
                 case 5:
-                    //listarEquipos();
+
                     break;
                 case 6:
                     //avanzado que seria Gestión de Equipamiento - Gestión de Premios y Reconocimientos;
