@@ -19,7 +19,7 @@ public class mainmenu {
     }
 
 
-    public void showmenu() {
+    public void showmenu() throws SQLException {
         int op;
 
         do {

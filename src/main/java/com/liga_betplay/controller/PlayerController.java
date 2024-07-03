@@ -4,21 +4,42 @@ import java.sql.SQLException;
 
 import com.liga_betplay.model.Player;
 import com.liga_betplay.model.dao.PlayerDao;
+import com.liga_betplay.service.PlayerService;
+import com.liga_betplay.utils.ConsoleUtils;
 
 public class PlayerController {
 
-    private PlayerDao playerDao;
+    private final PlayerService playerService;
 
-    public PlayerController() {
-        this.playerDao = new PlayerDao();
+    public PlayerController(PlayerService playerService) {
+        this.playerService = playerService;
     }
 
-    public void addPlayer(Player player) {
-        try {
-            playerDao.addPlayer(player);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void addPlayer() throws SQLException {
+
+        System.out.println("Enter the ID: ");
+        int id = ConsoleUtils.verifyingIntNoRange();
+
+        System.out.println("Enter the Name: ");
+        String name = ConsoleUtils.verifyEntryString();
+
+        System.out.println("Enter the Age:  ");
+        int age = ConsoleUtils.verifyingIntNoRange();
+
+        System.out.println("Enter the Nationality: ");
+        String nationality = ConsoleUtils.verifyEntryString();
+
+        System.out.println("Enter the Position: ");
+        String position = ConsoleUtils.verifyEntryString();
+
+        System.out.println("Enter the Shirt Number:  ");
+        int shirt_number = ConsoleUtils.verifyingIntNoRange();
+
+        System.out.println("Enter the ID of the team:  ");
+        int team = ConsoleUtils.verifyingIntNoRange();
+
+        Player newPlayer = new Player(id, name, age, nationality, position, shirt_number, team);
+        playerService.CreatePlayer(newPlayer);
     }
 
     // public Player findPlayerById(int id) {

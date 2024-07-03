@@ -3,28 +3,26 @@ package com.liga_betplay.model;
 public class Player extends Person {
     private String position;
     private int shirt_number;
-    private Team team;
+    private int team;
 
     // Default constructor
     public Player(){
         super();
     }
 
-    // Constructors
-    public Player(String position, int shirt_number, Team team) {
+    public Player(String position, int shirt_number, int team) {
         this.position = position;
         this.shirt_number = shirt_number;
         this.team = team;
     }
 
-    public Player(int id, String name, int age, String nationality, String position, int shirt_number, Team team) {
+    public Player(int id, String name, int age, String nationality, String position, int shirt_number, int team) {
         super(id, name, age, nationality);
         this.position = position;
         this.shirt_number = shirt_number;
         this.team = team;
     }
 
-    // Getters and Setters
     public String getPosition() {
         return position;
     }
@@ -41,11 +39,11 @@ public class Player extends Person {
         this.shirt_number = shirt_number;
     }
 
-    public Team getTeam() {
+    public int getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(int team) {
         this.team = team;
     }
 

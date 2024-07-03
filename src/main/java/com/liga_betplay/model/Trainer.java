@@ -1,11 +1,7 @@
 package com.liga_betplay.model;
 
-public class Trainer{
+public class Trainer extends Person{
 
-    private int id;
-    private String name;
-    private int age;
-    private String country;
     private int experience;
 
     public Trainer() {
@@ -15,7 +11,7 @@ public class Trainer{
         this.id = id;
         this.name = name;
         this.age = age;
-        this.country = country;
+        this.nationality = country;
         this.experience = experience;
     }
 
@@ -44,11 +40,11 @@ public class Trainer{
     }
 
     public String getCountry() {
-        return country;
+        return nationality;
     }
 
     public void setCountry(String country) {
-        this.country = country;
+        this.nationality = country;
     }
 
     public int getExperience() {

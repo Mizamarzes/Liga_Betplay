@@ -33,7 +33,7 @@ public class PlayerDao implements PlayerDaoInterface{
             ps.setString(3, player.getNationality());
             ps.setString(4, player.getPosition());
             ps.setInt(5, player.getShirt_number());
-            ps.setInt(6, player.getTeam().getId());
+            ps.setInt(6, player.getTeam());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -66,7 +66,7 @@ public class PlayerDao implements PlayerDaoInterface{
     @Override
     public List<Player> findAll() throws SQLException {
         List<Player> players = new ArrayList<>();
-        String query = "SELECT * FROM player";
+        String query = "SELECT * FROM Player";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -86,14 +86,14 @@ public class PlayerDao implements PlayerDaoInterface{
 
     @Override
     public void updatePlayer(Player player) throws SQLException {
-        String query = "UPDATE players SET name = ?, age = ?, nationality = ?, position = ?, shirt_number = ?, team_id = ? WHERE id = ?";
+        String query = "UPDATE Player SET name = ?, age = ?, nationality = ?, position = ?, shirt_number = ?, team_id = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, player.getName());
             ps.setInt(2, player.getAge());
             ps.setString(3, player.getNationality());
             ps.setString(4, player.getPosition());
             ps.setInt(5, player.getShirt_number());
-            ps.setInt(6, player.getTeam().getId());
+            ps.setInt(6, player.getTeam());
             ps.setInt(7, player.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -104,7 +104,7 @@ public class PlayerDao implements PlayerDaoInterface{
 
     @Override
     public void deletePlayer(int id) throws SQLException {
-        String query = "DELETE FROM player WHERE id = ?";
+        String query = "DELETE FROM Player WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();

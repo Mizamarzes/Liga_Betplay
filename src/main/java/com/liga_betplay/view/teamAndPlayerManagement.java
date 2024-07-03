@@ -1,13 +1,16 @@
 package com.liga_betplay.view;
 
-import com.liga_betplay.model.dao.PlayerDao;
+import java.sql.SQLException;
 
+import com.liga_betplay.controller.PlayerController;
+import com.liga_betplay.model.dao.PlayerDao;
+import com.liga_betplay.service.PlayerService;
 import com.liga_betplay.utils.ConsoleUtils;
 
 public class teamAndPlayerManagement {
     int op;
     
-    public void show() {
+    public void show() throws SQLException {
 
         do {
             ConsoleUtils.clear();
@@ -90,7 +93,10 @@ public class teamAndPlayerManagement {
         }
     }
 
-    public void PlayerMgn() {
+    public void PlayerMgn() throws SQLException {
+        PlayerDao pd = new PlayerDao();
+        PlayerService ps = new PlayerService(pd);
+        PlayerController pc = new PlayerController(ps);
         
         while (true) {
             ConsoleUtils.clear();
@@ -112,7 +118,7 @@ public class teamAndPlayerManagement {
             
             switch (op) {
                 case 1:
-                    
+                    pc.addPlayer();                    
                     break;
                 case 2:
                     
