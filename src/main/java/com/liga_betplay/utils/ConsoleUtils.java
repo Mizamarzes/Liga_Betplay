@@ -20,7 +20,7 @@ public class ConsoleUtils {
     }
 
     // verify if it is a number without range, i mean any number
-    public static int verifyingIntSinRango(){
+    public static int verifyingIntNoRange(){
         Scanner sc = new Scanner(System.in);
         int option = 0;
         boolean validInput = false;

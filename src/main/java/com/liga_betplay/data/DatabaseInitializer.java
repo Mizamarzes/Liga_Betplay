@@ -33,8 +33,6 @@ public class DatabaseInitializer {
             connection = DriverManager.getConnection(url, user, password);
             Statement statement = connection.createStatement();
 
-            String dropDatabaseQuery = "DROP DATABASE IF EXISTS betplay";
-            statement.executeUpdate(dropDatabaseQuery);
 
             String createDatabaseQuery = "CREATE DATABASE IF NOT EXISTS betplay";
             statement.executeUpdate(createDatabaseQuery);
