@@ -103,6 +103,7 @@ public class DatabaseInitializer {
         String createTableQuery = "CREATE TABLE IF NOT EXISTS Trainer (" +
                                   "id INT AUTO_INCREMENT PRIMARY KEY," +
                                   "name VARCHAR(100)," +
+                                  "age INT," +
                                   "country VARCHAR(100)," +
                                   "experience INT" +
                                   ")";
