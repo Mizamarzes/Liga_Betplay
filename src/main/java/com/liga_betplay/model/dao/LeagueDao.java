@@ -21,7 +21,7 @@ public class LeagueDao {
     }
 
     public League findLeagueById(int id) throws SQLException {
-        String query = "SELECT * FROM League WHERE id = ?";
+        String query = "SELECT * FROM league WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {

@@ -26,7 +26,7 @@ public class PlayerDao implements PlayerDaoInterface{
 
     @Override
     public void addPlayer(Player player) throws SQLException {
-        String query = "INSERT INTO Player (name, age, nationality, position, shirt_number, team) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO player (name, age, nationality, position, shirt_number, team) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, player.getName());
             ps.setInt(2, player.getAge());
@@ -43,7 +43,7 @@ public class PlayerDao implements PlayerDaoInterface{
 
     @Override
     public Player findById(int id) throws SQLException {
-        String query = "SELECT * FROM Player WHERE id = ?";
+        String query = "SELECT * FROM player WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -66,7 +66,7 @@ public class PlayerDao implements PlayerDaoInterface{
     @Override
     public List<Player> findAll() throws SQLException {
         List<Player> players = new ArrayList<>();
-        String query = "SELECT * FROM Player";
+        String query = "SELECT * FROM player";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -86,7 +86,7 @@ public class PlayerDao implements PlayerDaoInterface{
 
     @Override
     public void updatePlayer(Player player) throws SQLException {
-        String query = "UPDATE Player SET name = ?, age = ?, nationality = ?, position = ?, shirt_number = ?, team_id = ? WHERE id = ?";
+        String query = "UPDATE player SET name = ?, age = ?, nationality = ?, position = ?, shirt_number = ?, team_id = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, player.getName());
             ps.setInt(2, player.getAge());
@@ -104,7 +104,7 @@ public class PlayerDao implements PlayerDaoInterface{
 
     @Override
     public void deletePlayer(int id) throws SQLException {
-        String query = "DELETE FROM Player WHERE id = ?";
+        String query = "DELETE FROM player WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();

@@ -21,7 +21,7 @@ public class StadiumDao {
     }
 
     public Stadium findStadiumById(int id) throws SQLException {
-        String query = "SELECT * FROM Stadium WHERE id = ?";
+        String query = "SELECT * FROM stadium WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {

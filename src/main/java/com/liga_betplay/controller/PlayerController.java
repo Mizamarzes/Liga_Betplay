@@ -3,7 +3,6 @@ package com.liga_betplay.controller;
 import java.sql.SQLException;
 
 import com.liga_betplay.model.Player;
-import com.liga_betplay.model.dao.PlayerDao;
 import com.liga_betplay.service.PlayerService;
 import com.liga_betplay.utils.ConsoleUtils;
 

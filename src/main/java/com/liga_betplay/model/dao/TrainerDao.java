@@ -21,7 +21,7 @@ public class TrainerDao {
     }
 
     public Trainer findTrainerById(int id) throws SQLException {
-        String query = "SELECT * FROM Trainer WHERE id = ?";
+        String query = "SELECT * FROM trainer WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
