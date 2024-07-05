@@ -5,17 +5,15 @@ public class Player extends Person {
     private int shirt_number;
     private int team;
 
-    // Default constructor
-    public Player(){
-        super();
-    }
-
-    public Player(String position, int shirt_number, int team) {
+    // Constructor sin id
+    public Player(String name, int age, String nationality, String position, int shirt_number, int team) {
+        super(name, age, nationality);
         this.position = position;
         this.shirt_number = shirt_number;
         this.team = team;
     }
 
+    // Constructor con id
     public Player(int id, String name, int age, String nationality, String position, int shirt_number, int team) {
         super(id, name, age, nationality);
         this.position = position;
@@ -23,6 +21,7 @@ public class Player extends Person {
         this.team = team;
     }
 
+    // Getters y setters
     public String getPosition() {
         return position;
     }
@@ -47,4 +46,8 @@ public class Player extends Person {
         this.team = team;
     }
 
+    public int gerId(){
+        return id;
+    }
 }
+

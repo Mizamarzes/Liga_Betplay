@@ -17,9 +17,6 @@ public class PlayerController {
 
     public void addPlayer() throws SQLException {
 
-        System.out.println("Enter the ID: ");
-        int id = ConsoleUtils.verifyingIntNoRange();
-
         System.out.println("Enter the Name: ");
         String name = ConsoleUtils.verifyEntryString();
 
@@ -38,7 +35,7 @@ public class PlayerController {
         System.out.println("Enter the ID of the team:  ");
         int team = ConsoleUtils.verifyingIntNoRange();
 
-        Player newPlayer = new Player(id, name, age, nationality, position, shirt_number, team);
+        Player newPlayer = new Player(name, age, nationality, position, shirt_number, team);
         playerService.CreatePlayer(newPlayer);
     }
 

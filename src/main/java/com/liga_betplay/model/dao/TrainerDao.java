@@ -27,7 +27,7 @@ public class TrainerDao {
             try (ResultSet rs = ps.executeQuery()) {
                 
                 if (rs.next()) {
-                    Trainer trainer = new Trainer();
+                    Trainer trainer = new Trainer(query, id, query, id);
                     trainer.setId(rs.getInt("id"));
                     trainer.setName(rs.getString("name"));
                     trainer.setAge(rs.getInt("age"));
