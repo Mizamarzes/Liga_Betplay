@@ -48,7 +48,7 @@ public class PlayerDao implements PlayerDaoInterface{
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    Player player = new Player();
+                    Player player = new Player(id, query, id, query, query, id, id);
                     player.setId(rs.getInt("id"));
                     player.setName(rs.getString("name"));
                     player.setAge(rs.getInt("age"));
@@ -70,7 +70,7 @@ public class PlayerDao implements PlayerDaoInterface{
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
-                Player player = new Player();
+                Player player = new Player(0, query, 0, query, query, 0, 0);
                 player.setId(rs.getInt("id"));
                 player.setName(rs.getString("name"));
                 player.setAge(rs.getInt("age"));

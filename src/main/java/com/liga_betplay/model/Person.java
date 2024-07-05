@@ -6,12 +6,14 @@ public abstract class Person {
     protected int age;
     protected String nationality;
 
-    // Default constructor
-    public Person() {
-
+    // Constructor sin id
+    public Person(String name, int age, String nationality) {
+        this.name = name;
+        this.age = age;
+        this.nationality = nationality;
     }
 
-    // Constructor
+    // Constructor con id
     public Person(int id, String name, int age, String nationality) {
         this.id = id;
         this.name = name;
@@ -19,7 +21,7 @@ public abstract class Person {
         this.nationality = nationality;
     }
 
-    // Getters and Setters
+    // Getters y Setters
     public int getId() {
         return id;
     }
@@ -51,5 +53,5 @@ public abstract class Person {
     public void setNationality(String nationality) {
         this.nationality = nationality;
     }
-
 }
+

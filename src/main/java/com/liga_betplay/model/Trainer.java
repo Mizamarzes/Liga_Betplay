@@ -1,60 +1,37 @@
 package com.liga_betplay.model;
 
-public class Trainer extends Person{
+public class Trainer extends Person {
 
     private int experience;
 
-    public Trainer() {
-    }
-
-    public Trainer(int id, String name, int age, String country, int experience) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.nationality = country;
+    // Constructor sin id
+    public Trainer(String name, int age, String nationality, int experience) {
+        super(name, age, nationality);
         this.experience = experience;
     }
 
-    public int getId() {
-        return id;
+    // Constructor con id
+    public Trainer(int id, String name, int age, String nationality, int experience) {
+        super(id, name, age, nationality);
+        this.experience = experience;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getCountry() {
-        return nationality;
-    }
-
-    public void setCountry(String country) {
-        this.nationality = country;
-    }
-
+    // Getters y Setters
     public int getExperience() {
         return experience;
+    }
+
+    public int gerId(){
+        return id;
     }
 
     public void setExperience(int experience) {
         this.experience = experience;
     }
-    
-    
-    
+
+    public void setCountry(String nationality) {
+        this.nationality = nationality;
+    }
+
 }
+
