@@ -20,7 +20,7 @@ public class UserDao {
     }
 
     public boolean authUser(User user) throws SQLException {
-        String query = "SELECT * FROM User WHERE name = ?";
+        String query = "SELECT * FROM user WHERE name = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, user.getName());
 
@@ -47,8 +47,8 @@ public class UserDao {
     public String getUserRole(String username) throws SQLException {
         String roleName = null;
         String query = "SELECT r.name " +
-                       "FROM User u " +
-                       "JOIN Role r ON u.role = r.id " +
+                       "FROM user u " +
+                       "JOIN role r ON u.role = r.id " +
                        "WHERE u.name = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, username);

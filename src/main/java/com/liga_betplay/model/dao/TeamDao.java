@@ -1,19 +1,11 @@
 package com.liga_betplay.model.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
 
 import com.liga_betplay.data.DatabaseConnection;
 import com.liga_betplay.data.interfaces.TeamDaoInterface;
-import com.liga_betplay.model.Player;
-import com.liga_betplay.model.Stadium;
 import com.liga_betplay.model.Team;
 
 public class TeamDao implements TeamDaoInterface {
