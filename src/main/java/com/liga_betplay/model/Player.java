@@ -21,7 +21,6 @@ public class Player extends Person {
         this.team = team;
     }
 
-    // Getters y setters
     public String getPosition() {
         return position;
     }
@@ -46,8 +45,7 @@ public class Player extends Person {
         this.team = team;
     }
 
-    public int gerId(){
-        return id;
-    }
+    // Getters y setters
+    
 }
 

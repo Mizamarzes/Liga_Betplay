@@ -77,6 +77,7 @@ public class PlayerDao implements PlayerDaoInterface{
                 player.setNationality(rs.getString("nationality"));
                 player.setPosition(rs.getString("position"));
                 player.setShirt_number(rs.getInt("shirt_number"));
+                player.setTeam(rs.getInt("team"));
                 // objeto Team injuries y performances
                 players.add(player);
             }
