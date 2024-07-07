@@ -17,12 +17,14 @@ public class PlayerService {
         playerDaoInterface.addPlayer(player);
     }
 
-    public void FindPlayer(int id) throws SQLException {
-        playerDaoInterface.findById(id);
+    public Player FindPlayer(int id) throws SQLException {
+        Player player = playerDaoInterface.findById(id);
+        return player;
     }
 
     public List<Player> getAllPlayers() throws SQLException {
-        return playerDaoInterface.findAll();
+        List<Player> players = playerDaoInterface.findAll();
+        return players;
     }
 
     public void UpdatePlayer(Player player) throws SQLException {

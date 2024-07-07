@@ -121,16 +121,15 @@ public class teamAndPlayerManagement {
                     pc.addPlayer();                    
                     break;
                 case 2:
-                    
                     break;
                 case 3:
-                    
+                    pc.findPlayerById();  
                     break;
                 case 4:
                     
                     break;
                 case 5:
-
+                    pc.getAllPlayers();
                     break;
                 case 6:
                     //avanzado que seria Gestión de Equipamiento - Gestión de Premios y Reconocimientos;

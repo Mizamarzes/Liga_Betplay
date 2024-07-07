@@ -1,6 +1,7 @@
 package com.liga_betplay.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.liga_betplay.model.Player;
 import com.liga_betplay.service.PlayerService;
@@ -38,25 +39,45 @@ public class PlayerController {
         playerService.CreatePlayer(newPlayer);
     }
 
-    // public Player findPlayerById(int id) {
-    //     try {
-    //         return playerDao.findById(id);
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         // Aquí puedes manejar la excepción de acuerdo a tu lógica de la aplicación
-    //         return null; // O lanzar una excepción específica
-    //     }
-    // }
+    public Player findPlayerById() throws SQLException {
+    
+        ConsoleUtils.clear();
+        System.out.println("Enter the Player id:  ");
+        int id = ConsoleUtils.verifyingIntNoRange();
+        Player player = playerService.FindPlayer(id);
+        ConsoleUtils.clear();
+        System.out.println("+----+-------+------+-------------+----------+--------------+------+");
+        System.out.println("| id | name  | age  | nationality | position | shirt_number | team |");
+        System.out.println("+----+-------+------+-------------+----------+--------------+------+");
+        System.out.printf("|  %-2d| %-5s | %-4d | %-11s | %-8s | %-12d | %-4d |%n",
+                           player.getId(), player.getName(), player.getAge(), 
+                           player.getNationality(), player.getPosition(), 
+                           player.getShirt_number(), player.getTeam());
+        System.out.println("+----+-------+------+-------------+----------+--------------+------+");
+        ConsoleUtils.waitWindow();
+        return player;
+    }
 
-    // public List<Player> getAllPlayers() {
-    //     try {
-    //         return playerDao.findAll();
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         // Aquí puedes manejar la excepción de acuerdo a tu lógica de la aplicación
-    //         return null; // O lanzar una excepción específica
-    //     }
-    // }
+    public List<Player> getAllPlayers() throws SQLException {
+        ConsoleUtils.clear();
+        String border = "+----+-------+------+-------------+-----------+--------------+------+";
+        String header = "| id | name  | age  | nationality | position  | shirt_number | team |";
+        List<Player> players = playerService.getAllPlayers();
+
+        System.out.println(border);
+        System.out.println(header);
+        System.out.println(border);
+
+        for (Player player : players) {
+            System.out.printf("|  %-2d| %-5s | %-4d | %-11s | %-9s | %-12d | %-4d |%n",
+            player.getId(), player.getName(), player.getAge(), 
+            player.getNationality(), player.getPosition(), 
+            player.getShirt_number(), player.getTeam());          
+        }
+        System.out.println(border);
+        ConsoleUtils.waitWindow();
+        return players;
+    }
 
     // public void updatePlayer(Player player) {
     //     try {

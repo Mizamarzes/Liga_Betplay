@@ -297,7 +297,7 @@ CREATE TABLE IF NOT EXISTS ticket (
     CONSTRAINT FK_ticket_buyer_id FOREIGN KEY (buyer) REFERENCES user(id)
 ) ENGINE=InnoDB;
 
--- ############################## INSERCIONES ##################################Ç
+-- ############################## DEFAULT DATA ##################################Ç
 
 INSERT INTO permission (id, description) VALUES 
         (1, 'Administrator Perms'), 
@@ -305,7 +305,8 @@ INSERT INTO permission (id, description) VALUES
         (3, 'Referee Perms'), 
         (4, 'TeamDoctor Perms'), 
         (5, 'Journalist Perms'), 
-        (6, 'Fan Perms');
+        (6, 'Fan Perms'),
+        (7, 'Super Admin Perms');
 
 INSERT INTO role (id, name, permission) VALUES 
         (1, 'League Admin', 1),
@@ -313,10 +314,23 @@ INSERT INTO role (id, name, permission) VALUES
         (3, 'Referee', 3),
         (4, 'Team Doctor', 4),
         (5, 'Journalist', 5),
-        (6, 'Fan', 6);
+        (6, 'Fan', 6),
+        (7, 'Super Admin', 7);
 
 INSERT INTO user (id, name, email, password, role) VALUES  
-        (1, 'santilaguado', 'santi@gmail.com', 'santi123', 1),  
-        (2, 'mizamarzes', 'mizamarzes@gmail.com', 'mizamarzes123', 1);
+        (1, 'santilaguado', 'santi@gmail.com', 'santi123', 7),  
+        (2, 'mizamarzes', 'mizamarzes@gmail.com', 'mizamarzes123', 7);
+
+INSERT INTO stadium (id, name, location, capacity) VALUES
+        (1, 'Estado Americo Montanini', 'Bucaramanga', 28000);
+
+INSERT INTO league (id, name, country) VALUES
+        (1, 'Liga BetPlay Colombia', 'Colombia');
+
+INSERT INTO trainer (id, name, age, country, experience) VALUES
+        (1, 'Carlos', 45, 'Colombia', 10);
+
+INSERT INTO team (id, name, city, stadium, trainer, league) VALUES
+        (1, 'Atletico Bucaramanga', 'Bucaramanga', 1, 1, 1);
 
 -- Finish
