@@ -15,7 +15,7 @@ public class ConsoleUtils {
     public static void waitWindow(){
         Scanner sc = new Scanner(System.in);
         System.out.println("");
-        System.out.println("Press enter for continue");
+        System.out.println("Press enter to continue");
         sc.nextLine();
     }
 
@@ -30,7 +30,7 @@ public class ConsoleUtils {
                 option = sc.nextInt();
                 validInput = true;
             } catch (InputMismatchException e) {
-                System.out.println("Not valid. Please, enter a number.");
+                System.out.println("Invalid input. Please enter numbers only.");
                 sc.next();  
             }
         }
@@ -50,13 +50,14 @@ public class ConsoleUtils {
                 if (option >= min && option <= max) {
                     break; 
                 } else {
-                    System.out.println("Not valid. Please, select an option between " + min + " and " + max + ".");
+                    System.out.println("Invalid input. Please, select an option between " + min + " and " + max + ".");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Not valid. Please, enter a number between " + min + " and " + max + ".");
+                System.out.println("Invalid input. Please, enter a number between " + min + " and " + max + ".");
                 sc.nextLine(); 
             }
         }
+
         return option;
     }
 
@@ -70,9 +71,10 @@ public class ConsoleUtils {
             if (!entry.isEmpty()) {
                 break; 
             } else {
-                System.out.println("Not valid. Please, enter text.");
+                System.out.println("Invalid input. Please enter text only.");
             }
         }
+
         return entry; 
     }
 }

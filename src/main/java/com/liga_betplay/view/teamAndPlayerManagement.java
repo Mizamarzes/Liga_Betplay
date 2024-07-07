@@ -121,15 +121,17 @@ public class teamAndPlayerManagement {
                     pc.addPlayer();                    
                     break;
                 case 2:
+                    pc.UpdatePlayers();
                     break;
                 case 3:
                     pc.findPlayerById();  
                     break;
                 case 4:
-                    
+                    pc.deletePlayer();
                     break;
                 case 5:
                     pc.getAllPlayers();
+                    ConsoleUtils.waitWindow();
                     break;
                 case 6:
                     //avanzado que seria Gestión de Equipamiento - Gestión de Premios y Reconocimientos;

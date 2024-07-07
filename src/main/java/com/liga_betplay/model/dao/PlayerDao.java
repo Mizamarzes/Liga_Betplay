@@ -86,20 +86,62 @@ public class PlayerDao implements PlayerDaoInterface{
     }
 
     @Override
-    public void updatePlayer(Player player) throws SQLException {
-        String query = "UPDATE player SET name = ?, age = ?, nationality = ?, position = ?, shirt_number = ?, team_id = ? WHERE id = ?";
+    public void updatePlayerName(int id, String name) throws SQLException {
+        String query = "UPDATE player SET name = ? WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
-            ps.setString(1, player.getName());
-            ps.setInt(2, player.getAge());
-            ps.setString(3, player.getNationality());
-            ps.setString(4, player.getPosition());
-            ps.setInt(5, player.getShirt_number());
-            ps.setInt(6, player.getTeam());
-            ps.setInt(7, player.getId());
+            ps.setString(1, name);
+            ps.setInt(2, id);
             ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw e;
+        }
+    }
+
+    @Override
+    public void updatePlayerAge(int id, int age) throws SQLException {
+        String query = "UPDATE player SET age = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, age);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public void updatePlayerNationality(int id, String nationality) throws SQLException {
+        String query = "UPDATE player SET nationality = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, nationality);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public void updatePlayerPosition(int id, String position) throws SQLException {
+        String query = "UPDATE player SET position = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, position);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public void updatePlayerShirtNumber(int id, int shirtNumber) throws SQLException {
+        String query = "UPDATE player SET shirt_number = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, shirtNumber);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public void updatePlayerTeam(int id, int teamId) throws SQLException {
+        String query = "UPDATE player SET team = ? WHERE id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, teamId);
+            ps.setInt(2, id);
+            ps.executeUpdate();
         }
     }
 
