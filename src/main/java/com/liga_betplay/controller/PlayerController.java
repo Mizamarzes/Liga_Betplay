@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.liga_betplay.model.Player;
+import com.liga_betplay.model.dao.PlayerDao;
 import com.liga_betplay.service.PlayerService;
 import com.liga_betplay.utils.ConsoleUtils;
 
@@ -46,22 +47,22 @@ public class PlayerController {
         int id = ConsoleUtils.verifyingIntNoRange();
         Player player = playerService.FindPlayer(id);
         ConsoleUtils.clear();
-        System.out.println("+----+-------+------+-------------+----------+--------------+------+");
-        System.out.println("| id | name  | age  | nationality | position | shirt_number | team |");
-        System.out.println("+----+-------+------+-------------+----------+--------------+------+");
-        System.out.printf("|  %-2d| %-5s | %-4d | %-11s | %-8s | %-12d | %-4d |%n",
+        System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
+        System.out.println("| id |     name        | age  | nationality | position | shirt_number | team |");
+        System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
+        System.out.printf("|  %-2d| %-15s | %-4d | %-11s | %-8s | %-12d | %-4d |%n",
                            player.getId(), player.getName(), player.getAge(), 
                            player.getNationality(), player.getPosition(), 
                            player.getShirt_number(), player.getTeam());
-        System.out.println("+----+-------+------+-------------+----------+--------------+------+");
+        System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
         ConsoleUtils.waitWindow();
         return player;
     }
 
     public List<Player> getAllPlayers() throws SQLException {
         ConsoleUtils.clear();
-        String border = "+----+-------+------+-------------+-----------+--------------+------+";
-        String header = "| id | name  | age  | nationality | position  | shirt_number | team |";
+        String border = "+----+-----------------+------+-------------+----------+--------------+------+";
+        String header = "| id |     name        | age  | nationality | position | shirt_number | team |";
         List<Player> players = playerService.getAllPlayers();
 
         System.out.println(border);
@@ -69,46 +70,136 @@ public class PlayerController {
         System.out.println(border);
 
         for (Player player : players) {
-            System.out.printf("|  %-2d| %-5s | %-4d | %-11s | %-9s | %-12d | %-4d |%n",
+            System.out.printf("|  %-2d| %-15s | %-4d | %-11s | %-8s | %-12d | %-4d |%n",
             player.getId(), player.getName(), player.getAge(), 
             player.getNationality(), player.getPosition(), 
             player.getShirt_number(), player.getTeam());          
         }
         System.out.println(border);
-        ConsoleUtils.waitWindow();
         return players;
     }
 
-    // public void updatePlayer(Player player) {
-    //     try {
-    //         playerDao.updatePlayer(player);
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         // Aquí puedes manejar la excepción de acuerdo a tu lógica de la aplicación
-    //     }
-    // }
 
-    // public void deletePlayer(int id) {
-    //     try {
-    //         playerDao.deletePlayer(id);
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         // Aquí puedes manejar la excepción de acuerdo a tu lógica de la aplicación
-    //     }
-    // }
+    public void showInfo(int id) throws SQLException {
+    
+        Player player = playerService.FindPlayer(id);
+        ConsoleUtils.clear();
+        System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
+        System.out.println("| id |     name        | age  | nationality | position | shirt_number | team |");
+        System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
+        System.out.printf("|  %-2d| %-15s | %-4d | %-11s | %-8s | %-12d | %-4d |%n",
+                           player.getId(), player.getName(), player.getAge(), 
+                           player.getNationality(), player.getPosition(), 
+                           player.getShirt_number(), player.getTeam());
+        System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
+    }
 
-    // // Ejemplo de cómo podrías obtener el equipo de un jugador
-    // public Team findTeamByPlayerId(int playerId) {
-    //     try {
-    //         Player player = playerDao.findById(playerId);
-    //         if (player != null) {
-    //             TeamDao teamDao = new TeamDao();
-    //             return teamDao.findById(player.getTeam().getId());
-    //         }
-    //     } catch (SQLException e) {
-    //         e.printStackTrace();
-    //         // Aquí puedes manejar la excepción de acuerdo a tu lógica de la aplicación
-    //     }
-    //     return null;
-    // }
+    public void UpdatePlayers() throws SQLException {
+        getAllPlayers();
+        System.out.println("\n" + "Please enter the ID of the player to edit:");
+        int id = ConsoleUtils.verifyingIntNoRange();
+        ConsoleUtils.clear();
+        showInfo(id);
+
+        System.out.println("--------------------------------------\n" +
+        "       Please select an option:       \n" +
+        "--------------------------------------\n" +
+        "\n" +
+        "1. Update Team\n" +
+        "2. Update Position\n" +
+        "3. Update Shirt Number\n" +
+        "4. Update Name\n" +
+        "5. Update Age\n" +
+        "6. Update Nationality\n" +
+        "7. Update ALL\n"
+        );
+
+        int op = ConsoleUtils.verifyEntryInt(1, 7);
+            
+        switch (op) {
+            case 1:
+                ConsoleUtils.clear();     
+                System.out.println("Enter the new team ID:");
+                int new_team = ConsoleUtils.verifyingIntNoRange();
+                playerService.updatePlayerTeam(id, new_team);
+                break;
+            case 2:
+                ConsoleUtils.clear();
+                System.out.println("Enter the new Position:");
+                String new_pos = ConsoleUtils.verifyEntryString();
+                playerService.updatePlayerPosition(id, new_pos);
+                break;
+            case 3:
+                ConsoleUtils.clear();
+                System.out.println("Enter the new Shirt Number:");
+                int new_sn = ConsoleUtils.verifyingIntNoRange();
+                playerService.updatePlayerShirtNumber(id, new_sn);
+                break;
+            case 4:
+                ConsoleUtils.clear();
+                System.out.println("Enter the new Name:");
+                String new_name = ConsoleUtils.verifyEntryString();
+                playerService.updatePlayerName(id, new_name);
+                break;
+            case 5:
+                ConsoleUtils.clear();
+                System.out.println("Enter the new Age:");
+                int new_age = ConsoleUtils.verifyingIntNoRange();
+                playerService.updatePlayerAge(id, new_age);
+                break;
+            case 6:
+                ConsoleUtils.clear();
+                System.out.println("Enter the new Nationality:");
+                String new_nat = ConsoleUtils.verifyEntryString();
+                playerService.updatePlayerNationality(id, new_nat);
+                break;
+            case 7:
+                ConsoleUtils.clear();
+                System.out.println("Enter new team ID:");
+                new_team = ConsoleUtils.verifyingIntNoRange();
+                playerService.updatePlayerTeam(id, new_team);
+
+                System.out.println("Enter new position:");
+                new_pos = ConsoleUtils.verifyEntryString();
+                playerService.updatePlayerPosition(id, new_pos);
+
+                System.out.println("Enter new shirt number:");
+                new_sn = ConsoleUtils.verifyingIntNoRange();
+                playerService.updatePlayerShirtNumber(id, new_sn);
+
+                System.out.println("Enter new name:");
+                new_name = ConsoleUtils.verifyEntryString();
+                playerService.updatePlayerName(id, new_name);
+
+                System.out.println("Enter new age:");
+                new_age = ConsoleUtils.verifyingIntNoRange();
+                playerService.updatePlayerAge(id, new_age);
+
+                System.out.println("Enter new nationality:");
+                new_nat = ConsoleUtils.verifyEntryString();
+                playerService.updatePlayerNationality(id, new_nat);
+                return;
+            default:
+                break;
+        }
+    }
+
+    public void deletePlayer() throws SQLException {
+        getAllPlayers();
+        System.out.println("\n" + "Please enter the ID of the player to delete:");
+        int id = ConsoleUtils.verifyingIntNoRange();
+        System.out.println("Are you Sure?\n" +
+            "1. NO\n" +
+            "2. YES\n");
+        int conf = ConsoleUtils.verifyingIntNoRange();
+
+        if (conf == 2) {
+            playerService.DeletePlayer(id);
+            System.out.println("Jugador eliminado correctamente.");
+        } else {
+            System.out.println("Eliminación cancelada.");
+        }
+        ConsoleUtils.waitWindow();        
+    }
+    
 }

@@ -13,7 +13,17 @@ public interface PlayerDaoInterface {
 
     List<Player> findAll() throws SQLException;
 
-    void updatePlayer(Player player) throws SQLException;
+    void updatePlayerName(int id, String name) throws SQLException;
+
+    void updatePlayerAge(int id, int age) throws SQLException;
+
+    void updatePlayerNationality(int id, String nationality) throws SQLException;
+
+    void updatePlayerPosition(int id, String position) throws SQLException;
+
+    void updatePlayerShirtNumber(int id, int shirtNumber) throws SQLException;
+
+    void updatePlayerTeam(int id, int teamId) throws SQLException;
     
     void deletePlayer(int id) throws SQLException;
 }

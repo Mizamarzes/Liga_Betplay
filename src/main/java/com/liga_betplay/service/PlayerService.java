@@ -27,9 +27,30 @@ public class PlayerService {
         return players;
     }
 
-    public void UpdatePlayer(Player player) throws SQLException {
-        playerDaoInterface.updatePlayer(player);
+    public void updatePlayerName(int id, String name) throws SQLException {
+        playerDaoInterface.updatePlayerName(id, name);
     }
+
+    public void updatePlayerAge(int id, int age) throws SQLException {
+        playerDaoInterface.updatePlayerAge(id, age);
+    }
+
+    public void updatePlayerNationality(int id, String nationality) throws SQLException {
+        playerDaoInterface.updatePlayerNationality(id, nationality);
+    }
+
+    public void updatePlayerPosition(int id, String position) throws SQLException {
+        playerDaoInterface.updatePlayerPosition(id, position);
+    }
+
+    public void updatePlayerShirtNumber(int id, int shirtNumber) throws SQLException {
+        playerDaoInterface.updatePlayerShirtNumber(id, shirtNumber);
+    }
+
+    public void updatePlayerTeam(int id, int teamId) throws SQLException {
+        playerDaoInterface.updatePlayerTeam(id, teamId);
+    }
+
 
     public void DeletePlayer(int id) throws SQLException {
         playerDaoInterface.deletePlayer(id);
