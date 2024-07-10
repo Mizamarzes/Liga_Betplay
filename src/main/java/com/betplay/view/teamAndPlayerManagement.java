@@ -40,8 +40,9 @@ public class teamAndPlayerManagement {
         } while (true);
     }
 
-    public void teamMgn() {
+    public void teamMgn() throws SQLException {
         
+
         while (true) {
             ConsoleUtils.clear();
 

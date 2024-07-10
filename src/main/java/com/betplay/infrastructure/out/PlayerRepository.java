@@ -55,8 +55,8 @@ public class PlayerRepository implements PlayerService{
                     player.setNationality(rs.getString("nationality"));
                     player.setPosition(rs.getString("position"));
                     player.setShirt_number(rs.getInt("shirt_number"));
-                    // objeto Team injuries y performances
-                    return player;
+                    player.setTeam(rs.getInt("team"));
+                    return player; 
                 }
             }
         }
@@ -78,8 +78,7 @@ public class PlayerRepository implements PlayerService{
                 player.setPosition(rs.getString("position"));
                 player.setShirt_number(rs.getInt("shirt_number"));
                 player.setTeam(rs.getInt("team"));
-                // objeto Team injuries y performances
-                players.add(player);
+                players.add(player);  // WHY SHOULD I ADD THE TEAM?
             }
         }
         return players;

@@ -57,6 +57,7 @@ public class PlayerController {
         System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
         ConsoleUtils.waitWindow();
         return player;
+        
     }
 
     public List<Player> getAllPlayers() throws SQLException {
