@@ -1,4 +1,4 @@
-package application;
+package com.betplay.application;
 
 import java.sql.SQLException;
 import java.util.List;

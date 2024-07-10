@@ -2,11 +2,10 @@ package com.betplay.view;
 
 import java.sql.SQLException;
 
+import com.betplay.application.CreatePlayerUseCase;
 import com.betplay.infrastructure.in.PlayerController;
 import com.betplay.infrastructure.out.PlayerRepository;
 import com.betplay.utils.ConsoleUtils;
-
-import application.CreatePlayerUseCase;
 
 public class teamAndPlayerManagement {
     int op;

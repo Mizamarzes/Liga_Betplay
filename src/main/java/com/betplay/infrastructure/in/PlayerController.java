@@ -3,10 +3,9 @@ package com.betplay.infrastructure.in;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.betplay.application.CreatePlayerUseCase;
 import com.betplay.domain.entity.Player;
 import com.betplay.utils.ConsoleUtils;
-
-import application.CreatePlayerUseCase;
 
 public class PlayerController {
     private final CreatePlayerUseCase createPlayerUseCase;
