@@ -43,7 +43,7 @@ public class PlayerRepository implements PlayerService{
 
     @Override
     public Player findById(int id) throws SQLException {
-        String query = "SELECT * FROM player WHERE id = ?";
+        String query = "SELECT id, name, age, nationality, position, shirt_number, team FROM player WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -66,7 +66,7 @@ public class PlayerRepository implements PlayerService{
     @Override
     public List<Player> findAll() throws SQLException {
         List<Player> players = new ArrayList<>();
-        String query = "SELECT * FROM player";
+        String query = "SELECT id, name, age, nationality, position, shirt_number, team FROM player";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
