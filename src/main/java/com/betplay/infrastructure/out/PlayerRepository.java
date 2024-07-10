@@ -43,7 +43,7 @@ public class PlayerRepository implements PlayerService{
 
     @Override
     public Player findById(int id) throws SQLException {
-        String query = "SELECT * FROM player WHERE id = ?";
+        String query = "SELECT id, name, age, nationality, position, shirt_number, team FROM player WHERE id = ?";
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -55,8 +55,8 @@ public class PlayerRepository implements PlayerService{
                     player.setNationality(rs.getString("nationality"));
                     player.setPosition(rs.getString("position"));
                     player.setShirt_number(rs.getInt("shirt_number"));
-                    // objeto Team injuries y performances
-                    return player;
+                    player.setTeam(rs.getInt("team"));
+                    return player; 
                 }
             }
         }
@@ -66,7 +66,7 @@ public class PlayerRepository implements PlayerService{
     @Override
     public List<Player> findAll() throws SQLException {
         List<Player> players = new ArrayList<>();
-        String query = "SELECT * FROM player";
+        String query = "SELECT id, name, age, nationality, position, shirt_number, team FROM player";
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
@@ -78,8 +78,7 @@ public class PlayerRepository implements PlayerService{
                 player.setPosition(rs.getString("position"));
                 player.setShirt_number(rs.getInt("shirt_number"));
                 player.setTeam(rs.getInt("team"));
-                // objeto Team injuries y performances
-                players.add(player);
+                players.add(player);  // WHY SHOULD I ADD THE TEAM?
             }
         }
         return players;

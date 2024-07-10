@@ -9,11 +9,10 @@ import com.betplay.utils.ConsoleUtils;
 import application.CreatePlayerUseCase;
 
 public class PlayerController {
+    private final CreatePlayerUseCase createPlayerUseCase;
 
-    private final CreatePlayerUseCase playerService;
-
-    public PlayerController(CreatePlayerUseCase playerService) {
-        this.playerService = playerService;
+    public PlayerController(CreatePlayerUseCase createPlayerUseCase) {
+        this.createPlayerUseCase = createPlayerUseCase;
     }
 
     public void addPlayer() throws SQLException {
@@ -38,7 +37,7 @@ public class PlayerController {
         int team = ConsoleUtils.verifyingIntNoRange();
 
         Player newPlayer = new Player(name, age, nationality, position, shirt_number, team);
-        playerService.CreatePlayer(newPlayer);
+        createPlayerUseCase.CreatePlayer(newPlayer);
     }
 
     public Player findPlayerById() throws SQLException {
@@ -46,7 +45,7 @@ public class PlayerController {
         ConsoleUtils.clear();
         System.out.println("Enter the Player id:  ");
         int id = ConsoleUtils.verifyingIntNoRange();
-        Player player = playerService.FindPlayer(id);
+        Player player = createPlayerUseCase.FindPlayer(id);
         ConsoleUtils.clear();
         System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
         System.out.println("| id |     name        | age  | nationality | position | shirt_number | team |");
@@ -56,14 +55,16 @@ public class PlayerController {
                            player.getNationality(), player.getPosition(), 
                            player.getShirt_number(), player.getTeam());
         System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
+        ConsoleUtils.waitWindow();
         return player;
+        
     }
 
     public List<Player> getAllPlayers() throws SQLException {
         ConsoleUtils.clear();
         String border = "+----+-----------------+------+-------------+----------+--------------+------+";
         String header = "| id |     name        | age  | nationality | position | shirt_number | team |";
-        List<Player> players = playerService.getAllPlayers();
+        List<Player> players = createPlayerUseCase.getAllPlayers();
 
         System.out.println(border);
         System.out.println(header);
@@ -82,7 +83,7 @@ public class PlayerController {
 
     public void showInfo(int id) throws SQLException {
     
-        Player player = playerService.FindPlayer(id);
+        Player player = createPlayerUseCase.FindPlayer(id);
         ConsoleUtils.clear();
         System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
         System.out.println("| id |     name        | age  | nationality | position | shirt_number | team |");
@@ -121,63 +122,63 @@ public class PlayerController {
                 ConsoleUtils.clear();     
                 System.out.println("Enter the new team ID:");
                 int new_team = ConsoleUtils.verifyingIntNoRange();
-                playerService.updatePlayerTeam(id, new_team);
+                createPlayerUseCase.updatePlayerTeam(id, new_team);
                 break;
             case 2:
                 ConsoleUtils.clear();
                 System.out.println("Enter the new Position:");
                 String new_pos = ConsoleUtils.verifyEntryString();
-                playerService.updatePlayerPosition(id, new_pos);
+                createPlayerUseCase.updatePlayerPosition(id, new_pos);
                 break;
             case 3:
                 ConsoleUtils.clear();
                 System.out.println("Enter the new Shirt Number:");
                 int new_sn = ConsoleUtils.verifyingIntNoRange();
-                playerService.updatePlayerShirtNumber(id, new_sn);
+                createPlayerUseCase.updatePlayerShirtNumber(id, new_sn);
                 break;
             case 4:
                 ConsoleUtils.clear();
                 System.out.println("Enter the new Name:");
                 String new_name = ConsoleUtils.verifyEntryString();
-                playerService.updatePlayerName(id, new_name);
+                createPlayerUseCase.updatePlayerName(id, new_name);
                 break;
             case 5:
                 ConsoleUtils.clear();
                 System.out.println("Enter the new Age:");
                 int new_age = ConsoleUtils.verifyingIntNoRange();
-                playerService.updatePlayerAge(id, new_age);
+                createPlayerUseCase.updatePlayerAge(id, new_age);
                 break;
             case 6:
                 ConsoleUtils.clear();
                 System.out.println("Enter the new Nationality:");
                 String new_nat = ConsoleUtils.verifyEntryString();
-                playerService.updatePlayerNationality(id, new_nat);
+                createPlayerUseCase.updatePlayerNationality(id, new_nat);
                 break;
             case 7:
                 ConsoleUtils.clear();
                 System.out.println("Enter new team ID:");
                 new_team = ConsoleUtils.verifyingIntNoRange();
-                playerService.updatePlayerTeam(id, new_team);
+                createPlayerUseCase.updatePlayerTeam(id, new_team);
 
                 System.out.println("Enter new position:");
                 new_pos = ConsoleUtils.verifyEntryString();
-                playerService.updatePlayerPosition(id, new_pos);
+                createPlayerUseCase.updatePlayerPosition(id, new_pos);
 
                 System.out.println("Enter new shirt number:");
                 new_sn = ConsoleUtils.verifyingIntNoRange();
-                playerService.updatePlayerShirtNumber(id, new_sn);
+                createPlayerUseCase.updatePlayerShirtNumber(id, new_sn);
 
                 System.out.println("Enter new name:");
                 new_name = ConsoleUtils.verifyEntryString();
-                playerService.updatePlayerName(id, new_name);
+                createPlayerUseCase.updatePlayerName(id, new_name);
 
                 System.out.println("Enter new age:");
                 new_age = ConsoleUtils.verifyingIntNoRange();
-                playerService.updatePlayerAge(id, new_age);
+                createPlayerUseCase.updatePlayerAge(id, new_age);
 
                 System.out.println("Enter new nationality:");
                 new_nat = ConsoleUtils.verifyEntryString();
-                playerService.updatePlayerNationality(id, new_nat);
+                createPlayerUseCase.updatePlayerNationality(id, new_nat);
                 return;
             default:
                 break;
@@ -194,7 +195,7 @@ public class PlayerController {
         int conf = ConsoleUtils.verifyingIntNoRange();
 
         if (conf == 2) {
-            playerService.DeletePlayer(id);
+            createPlayerUseCase.DeletePlayer(id);
             System.out.println("Player successfully eliminated.");
         } else {
             System.out.println("Elimination canceled.");

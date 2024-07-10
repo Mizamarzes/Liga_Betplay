@@ -5,7 +5,7 @@ public class Player extends Person {
     private int shirt_number;
     private int team;
 
-    // Constructor sin id
+    // Constructor without id
     public Player(String name, int age, String nationality, String position, int shirt_number, int team) {
         super(name, age, nationality);
         this.position = position;
@@ -13,7 +13,7 @@ public class Player extends Person {
         this.team = team;
     }
 
-    // Constructor con id
+    // Constructor with id
     public Player(int id, String name, int age, String nationality, String position, int shirt_number, int team) {
         super(id, name, age, nationality);
         this.position = position;
@@ -21,6 +21,7 @@ public class Player extends Person {
         this.team = team;
     }
 
+    // Getters y setters
     public String getPosition() {
         return position;
     }
@@ -44,8 +45,5 @@ public class Player extends Person {
     public void setTeam(int team) {
         this.team = team;
     }
-
-    // Getters y setters
-    
 }
 
