@@ -4,6 +4,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ConsoleUtils {
+    private static final Scanner sc = new Scanner(System.in);
+    
 
     // Clean the console
     public static void clear() {
@@ -13,15 +15,14 @@ public class ConsoleUtils {
 
     // time wait for show up information
     public static void waitWindow(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("");
         System.out.println("Press enter to continue");
         sc.nextLine();
+        
     }
 
     // verify if it is a number without range, i mean any number
     public static int verifyingIntNoRange(){
-        Scanner sc = new Scanner(System.in);
         int option = 0;
         boolean validInput = false;
 
@@ -40,7 +41,6 @@ public class ConsoleUtils {
 
     // verify if it is a number and you must enter the min and the max
     public static int verifyEntryInt(int min, int max) {
-        Scanner sc = new Scanner(System.in);
         int option = -1;
 
         while (true) {
@@ -63,7 +63,6 @@ public class ConsoleUtils {
 
     // verify if it is text
     public static String verifyEntryString() {
-        Scanner sc = new Scanner(System.in);
         String entry = "";
 
         while (true) {
