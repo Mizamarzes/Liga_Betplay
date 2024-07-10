@@ -1,11 +1,9 @@
 package com.betplay.infrastructure.in;
 
-import java.io.Console;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.betplay.domain.entity.Player;
-import com.betplay.infrastructure.out.PlayerRepository;
 import com.betplay.utils.ConsoleUtils;
 
 import application.CreatePlayerUseCase;
@@ -58,7 +56,6 @@ public class PlayerController {
                            player.getNationality(), player.getPosition(), 
                            player.getShirt_number(), player.getTeam());
         System.out.println("+----+-----------------+------+-------------+----------+--------------+------+");
-        ConsoleUtils.waitWindow();
         return player;
     }
 

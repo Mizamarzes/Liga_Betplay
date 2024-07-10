@@ -95,9 +95,9 @@ public class teamAndPlayerManagement {
     }
 
     public void PlayerMgn() throws SQLException {
-        PlayerRepository pd = new PlayerRepository();
-        CreatePlayerUseCase ps = new CreatePlayerUseCase(pd);
-        PlayerController pc = new PlayerController(ps);
+        PlayerRepository pr = new PlayerRepository();
+        CreatePlayerUseCase cpuu = new CreatePlayerUseCase(pr);
+        PlayerController pc = new PlayerController(cpuu);
         
         while (true) {
             ConsoleUtils.clear();
@@ -126,6 +126,7 @@ public class teamAndPlayerManagement {
                     break;
                 case 3:
                     pc.findPlayerById();  
+                    ConsoleUtils.waitWindow();
                     break;
                 case 4:
                     pc.deletePlayer();
